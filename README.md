@@ -2,13 +2,13 @@
 
 # 🕸️ Graph Neural Network Deep Dive
 
-**"`GCNConv(in, out)`을 쌓는 것과, $H^{(l+1)} = \sigma(\tilde{D}^{-1/2} \tilde{A} \tilde{D}^{-1/2} H^{(l)} W^{(l)})$이 정규화된 Laplacian $L = I - D^{-1/2} A D^{-1/2}$의 Chebyshev polynomial 1차 근사 + renormalization trick에서 어떻게 유도되고, 왜 Spectral Convolution이 Spatial 1-hop aggregation과 동치가 되는지 한 줄씩 증명할 수 있는 것은 다르다"**
+**"`GCNConv(in, out)`을 쌓는 것과, GCN propagation H⁽ˡ⁺¹⁾ = σ(D̃⁻¹ᐟ² Ã D̃⁻¹ᐟ² H⁽ˡ⁾ W⁽ˡ⁾) 이 정규화된 Laplacian L = I − D⁻¹ᐟ² A D⁻¹ᐟ² 의 Chebyshev polynomial 1차 근사 + renormalization trick 에서 어떻게 유도되고, 왜 Spectral Convolution이 Spatial 1-hop aggregation과 동치가 되는지 한 줄씩 증명할 수 있는 것은 다르다"**
 
 <br/>
 
 > *Message Passing을 **이름으로 아는 것**과 — Xu et al. 2019의 GIN 정리에서 Message Passing GNN의 표현력이 1-Weisfeiler-Lehman test에 의해 상한이 매겨지고, sum + MLP aggregator가 multiset에 injective이기 때문에 GIN이 이 상한을 달성한다는 것을 증명할 수 있는 것은 다르다.*
 
-> *Over-smoothing을 **현상으로 아는 것**과 — Li et al. 2018의 정리에서 $L$층 GCN propagation 후 node feature가 정규화된 Laplacian의 null space (= connected component 수만큼의 공간) 으로 지수 수렴하고, connected graph에서는 상수 vector로 collapse한다는 것을 Laplacian 고유분해로 증명할 수 있는 것은 다르다.*
+> *Over-smoothing을 **현상으로 아는 것**과 — Li et al. 2018의 정리에서 L 층 GCN propagation 후 node feature가 정규화된 Laplacian의 null space (= connected component 수만큼의 공간) 으로 지수 수렴하고, connected graph에서는 상수 vector로 collapse한다는 것을 Laplacian 고유분해로 증명할 수 있는 것은 다르다.*
 
 <br/>
 
