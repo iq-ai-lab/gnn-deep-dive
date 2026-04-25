@@ -21,9 +21,9 @@ Bruna 2014 Spectral Networks · Defferrard 2016 ChebNet · Kipf & Welling 2017 G
 [![PyG](https://img.shields.io/badge/PyG-2.4.0-3C2179?style=flat-square)](https://pytorch-geometric.readthedocs.io/)
 [![NetworkX](https://img.shields.io/badge/NetworkX-3.2-FF7F00?style=flat-square)](https://networkx.org/)
 [![Docs](https://img.shields.io/badge/Docs-33개-blue?style=flat-square&logo=readthedocs&logoColor=white)](./README.md)
-[![Theorems](https://img.shields.io/badge/Theorems·Definitions-140+개-success?style=flat-square)](./README.md)
+[![Theorems](https://img.shields.io/badge/Theorems·Definitions-380+개-success?style=flat-square)](./README.md)
 [![Reproductions](https://img.shields.io/badge/Paper_reproductions-12개-critical?style=flat-square)](./README.md)
-[![Exercises](https://img.shields.io/badge/Exercises-95+개-orange?style=flat-square)](./README.md)
+[![Exercises](https://img.shields.io/badge/Exercises-99개-orange?style=flat-square)](./README.md)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square&logo=opensourceinitiative&logoColor=white)](./LICENSE)
 
 </div>
@@ -247,26 +247,52 @@ GNN에 관한 자료는 대부분 **"`GCNConv`, `SAGEConv`, `GATConv`를 쌓으�
 
 | 정리·결과 | 서술 | 출처 문서 |
 |----------|------|----------|
+| **Walk Counting via $A^k$** | $(A^k)_{ij}$ = 길이 $k$ walk 수, $\text{tr}(A^3)/6$ = triangle 수 | [Ch1-01](./ch1-graph-laplacian/01-graph-basics.md) |
 | **Laplacian PSD** | $x^T L x = \frac{1}{2} \sum (x_i - x_j)^2 \geq 0$, $\dim \ker(L) = $ # components | [Ch1-02](./ch1-graph-laplacian/02-unnormalized-laplacian.md) |
 | **Normalized Laplacian 고유값** | $L_{\text{sym}}$, $L_{\text{rw}}$ 의 고유값 $\in [0, 2]$ | [Ch1-03](./ch1-graph-laplacian/03-normalized-laplacian.md) |
 | **Cheeger's Inequality** | $h^2/2 \leq \lambda_2 \leq 2h$ — Fiedler value와 conductance 관계 | [Ch1-04](./ch1-graph-laplacian/04-spectral-theory.md) |
-| **Graph Fourier Transform** | $\hat{x} = U^T x$, $x^T L x = \sum_k \lambda_k |\hat{x}_k|^2$ | [Ch1-05](./ch1-graph-laplacian/05-graph-fourier.md) |
+| **Graph Fourier Transform** | $\hat{x} = U^T x$, $x^T L x = \sum_k \lambda_k \|\hat{x}_k\|^2$ | [Ch1-05](./ch1-graph-laplacian/05-graph-fourier.md) |
 | **PageRank Stationary** | $\pi_i = d_i / (2\|E\|)$ (detailed balance) | [Ch1-06](./ch1-graph-laplacian/06-random-walk-pagerank.md) |
-| **ChebNet K-hop Locality** | $T_k(\tilde{L})$ 는 $k$-hop neighbor에만 의존 | [Ch2-02](./ch2-spectral-gcn/02-chebnet.md) |
+| **Polynomial Filter ↔ K-hop Locality** | $\hat g$ polynomial of degree $K$ ⟺ $K$-hop spatial filter | [Ch2-01](./ch2-spectral-gcn/01-spectral-convolution.md) |
+| **ChebNet K-hop Locality** | $T_k(\tilde{L})$ 는 $k$-hop neighbor에만 의존, recurrence $O(mK)$ | [Ch2-02](./ch2-spectral-gcn/02-chebnet.md) |
 | **GCN 유도 (Kipf-Welling 2017)** | ChebNet $K=1$ + renormalization → $H' = \sigma(\tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2} H W)$ | [Ch2-03](./ch2-spectral-gcn/03-gcn-derivation.md) |
+| **GCN as Low-pass Filter** | $\hat g_{\text{GCN}}(\tilde\lambda) = 1 - \tilde\lambda$, $L$-layer 면 $(1-\tilde\lambda)^L$ | [Ch2-04](./ch2-spectral-gcn/04-spectral-vs-spatial.md) |
 | **Spectral-Spatial 동치** | Spectral polynomial filter = localized spatial aggregation | [Ch2-04](./ch2-spectral-gcn/04-spectral-vs-spatial.md) |
 | **MPNN 통일 프레임워크** | GCN/SAGE/GAT/GIN = aggregator 선택의 차이 | [Ch3-01](./ch3-message-passing/01-mpnn-framework.md) |
-| **GIN Sum Injectivity** | Sum + MLP가 multiset universal function | [Ch3-04](./ch3-message-passing/04-gin.md) |
-| **1-WL 상한 (Xu 2019)** | Message Passing GNN 표현력 $\leq$ 1-WL | [Ch4-02](./ch4-expressive-power/02-gnn-wl-equivalence.md) |
-| **GIN 1-WL 달성** | Sum + MLP가 1-WL refinement 모두 구분 | [Ch4-03](./ch4-expressive-power/03-gin-optimality.md) |
-| **k-WL 위계** | 1-WL ⊊ 2-WL ⊊ 3-WL ⊊ … (strict) | [Ch4-04](./ch4-expressive-power/04-k-wl.md) |
-| **Over-smoothing (Li 2018)** | $P^L x \to$ projection on $\ker(L_{\text{sym}})$, rate $(\lambda_2)^L$ | [Ch5-02](./ch5-over-smoothing/02-laplacian-proof.md) |
-| **APPNP Closed-form** | $Z = \alpha (I - (1-\alpha)\tilde{P})^{-1} H^{(0)}$ | [Ch5-05](./ch5-over-smoothing/05-appnp-jkn.md) |
-| **Graphormer Structural Encoding** | Centrality + Spatial + Edge encoding을 attention에 주입 | [Ch7-01](./ch7-modern-gnn/01-graphormer.md) |
-| **MPNN ⊂ Graph Transformer** | Sparse (GAT) ⊂ Dense (Graphormer) attention 위계 | [Ch7-02](./ch7-modern-gnn/02-gnn-attention-unification.md) |
-| **E(3) Equivariance (EGNN)** | $\phi(Rx + t) = R\phi(x) + t$, coordinate-feature 분리 | [Ch7-03](./ch7-modern-gnn/03-equivariant-gnn.md) |
+| **GraphSAGE Inductive** | Parameter graph-agnostic, mini-batch $O(B \cdot S^L \cdot d^2)$ | [Ch3-02](./ch3-message-passing/02-graphsage.md) |
+| **GAT as Sparse Transformer** | $\text{GAT}(X, A) = \text{Transformer}(X; M = \log A)$ | [Ch3-03](./ch3-message-passing/03-gat.md) |
+| **GIN Sum Injectivity** | Sum + MLP가 multiset universal function (Xu 2019 Lemma 5) | [Ch3-04](./ch3-message-passing/04-gin.md) |
+| **R-GCN Basis Decomposition** | $W_r = \sum_b a_{rb} V_b$, $O(B d^2 + \|\mathcal R\| B)$ | [Ch3-05](./ch3-message-passing/05-heterogeneous.md) |
+| **1-WL Insufficiency** | CSL, Paley graph 가 1-WL 동등 but non-isomorphic | [Ch4-01](./ch4-expressive-power/01-wl-test.md) |
+| **1-WL 상한 (Xu 2019)** | Message Passing GNN 표현력 $\leq$ 1-WL (induction on layer) | [Ch4-02](./ch4-expressive-power/02-gnn-wl-equivalence.md) |
+| **GIN 1-WL 달성** | Sum + MLP가 1-WL refinement 모두 구분 (Theorem 3) | [Ch4-03](./ch4-expressive-power/03-gin-optimality.md) |
+| **k-WL 위계** | 1-WL ⊊ 2-WL ⊊ 3-WL ⊊ … (Cai-Fürer-Immerman 1992) | [Ch4-04](./ch4-expressive-power/04-k-wl.md) |
+| **3-WL Distinguishes SR Graphs** | 4×4 rook vs Shrikhande — 3-WL 이 처음 구분 | [Ch4-04](./ch4-expressive-power/04-k-wl.md) |
+| **LapPE 의 1-WL 우회** | Spectral 좌표가 symmetric graph 노드 구분 가능 | [Ch4-05](./ch4-expressive-power/05-positional-encoding.md) |
+| **Over-smoothing (Li 2018)** | $P^L x \to$ projection on $\ker(L_{\text{sym}})$, rate $\|\mu_2\|^L$ | [Ch5-02](./ch5-over-smoothing/02-laplacian-proof.md) |
+| **PairNorm Energy Preservation** | Layer-wise feature distance 평균 유지 → bounded Dirichlet energy | [Ch5-03](./ch5-over-smoothing/03-dropedge-pairnorm.md) |
+| **APPNP Closed-form** | $Z = \alpha (I - (1-\alpha)\tilde{P})^{-1} H^{(0)}$ — rational filter, no collapse | [Ch5-05](./ch5-over-smoothing/05-appnp-jkn.md) |
+| **READOUT 표현력 위계** | Sum (multiset injective) > Mean / Max | [Ch6-02](./ch6-applications/02-graph-classification.md) |
+| **RotatE Relation Patterns** | Rotation 으로 symmetric/asymmetric/inversion/composition 모두 표현 | [Ch6-03](./ch6-applications/03-link-prediction.md) |
+| **Graphormer Structural Encoding** | Centrality + Spatial (SPD) + Edge encoding을 attention bias 로 주입 | [Ch7-01](./ch7-modern-gnn/01-graphormer.md) |
+| **MPNN ⊊ GAT ⊊ Graphormer** | Sparse → Dense attention 의 strict 위계 | [Ch7-02](./ch7-modern-gnn/02-gnn-attention-unification.md) |
+| **E(3) Equivariance (EGNN)** | $\phi(Rx + t) = R\phi(x) + t$, $(x_i - x_j)$ 형태가 자동 equivariance | [Ch7-03](./ch7-modern-gnn/03-equivariant-gnn.md) |
+| **GNN as Foundation Model** | Cluster-GCN/GraphSAINT 가 large-scale 표준, LLM+GNN hybrid 가 미래 | [Ch7-04](./ch7-modern-gnn/04-scaling-and-future.md) |
 
-> 💡 **챕터별 문서·정리/정의 수**: Ch1(6문서) · Ch2(4문서) · Ch3(5문서) · Ch4(5문서) · Ch5(5문서) · Ch6(4문서) · Ch7(4문서) — **합계 33문서 + 140+ 정리·정의 + 35+ 엄밀한 $\square$ 증명 + 100+ PyG/NumPy 실험**.
+> 💡 **챕터별 문서·정리/정의 수**:
+>
+> | 챕터 | 문서 수 | 정리·정의 |
+> |------|---------|------------|
+> | Ch1 그래프 이론·Laplacian | 6 | ~73 |
+> | Ch2 Spectral GCN | 4 | ~46 |
+> | Ch3 Message Passing | 5 | ~57 |
+> | Ch4 표현력 (WL) | 5 | ~60 |
+> | Ch5 Over-smoothing | 5 | ~57 |
+> | Ch6 응용 태스크 | 4 | ~45 |
+> | Ch7 현대 GNN | 4 | ~49 |
+> | **합계** | **33** | **~387** |
+>
+> 추가로 **40+ 엄밀한 $\square$ 증명 + 99 연습문제 (모두 해설 포함) + 165+ NumPy/PyTorch/PyG 실험 코드**.
 
 ---
 
@@ -396,16 +422,16 @@ print('3-round 1-WL labels:', labels[:10], '...')
 | 1 | 🎯 **핵심 질문** | 이 문서가 답하는 3~5개의 본질적 질문 |
 | 2 | 🔍 **왜 이 기법이 그래프 학습에 필수인가** | Laplacian·spectral·WL·over-smoothing과의 연결 |
 | 3 | 📐 **수학적 선행 조건** | LA · NN Theory · GM · Transformer 레포의 어떤 정리를 전제하는지 |
-| 4 | 📖 **직관적 이해** | 그래프 시각화 · message propagation 애니메이션 · Fiedler 클러스터링 |
-| 5 | ✏️ **엄밀한 정의·정리** | Laplacian · spectral conv · MPNN · WL · GIN · over-smoothing |
-| 6 | 🔬 **증명 또는 수학적 유도** | Laplacian PSD · GCN 유도 · WL 등가성 · $P^L \to \ker(L)$ |
-| 7 | 💻 **실험 재현** | NumPy/PyG로 Laplacian · GCN · GIN · over-smoothing · GAT attention · Graphormer |
+| 4 | 📖 **직관적 이해** | 그래프 시각화 · message propagation · Fiedler 클러스터링 |
+| 5 | ✏️ **엄밀한 정의** | Laplacian · spectral conv · MPNN · WL · GIN · over-smoothing |
+| 6 | 🔬 **정리와 증명 / 결과** | Laplacian PSD · GCN 유도 · WL 등가성 · $P^L \to \ker(L)$ |
+| 7 | 💻 **구현 (NumPy / PyTorch / PyG)** | Laplacian · GCN · GIN · over-smoothing · GAT attention · Graphormer |
 | 8 | 🔗 **실전 활용** | 언제 GNN, 언제 Transformer, 언제 Graph Transformer |
 | 9 | ⚖️ **가정과 한계** | WL 상한 · over-smoothing · 계산 비용 · 대규모 그래프 sampling |
-| 10 | 📌 **핵심 정리** | 한 장으로 요약 |
-| 11 | 🤔 **생각해볼 문제 (+ 해설)** | 손 계산 · 증명 재구성 · 구현 · 논문 비평 문제 |
+| 10 | 📌 **핵심 정리** | 한 장으로 요약 ($\boxed{}$ + 표) |
+| 11 | 🤔 **생각해볼 문제 (+ 해설)** | 손 계산 · 증명 재구성 · 구현 · 논문 비평 (`<details>` 펼침 해설) |
 
-> 📚 **연습문제 총 95개+**: 대부분 문서가 3문제 (기초 / 심화 / 논문 비평), 모든 문제에 `<details>` 펼침 해설 포함. Laplacian PSD 손 증명부터 GCN 유도 재구성, WL 등가성 증명, GIN sum injectivity 반례, over-smoothing 수렴 속도 측정까지 단계적으로 심화됩니다.
+> 📚 **연습문제 총 99개** (33 문서 × 3 문제): 기초 / 심화 / 논문 비평 의 3-tier 구성, 모든 문제에 `<details>` 펼침 해설 포함. Laplacian PSD 손 증명부터 GCN 유도 재구성, WL 등가성 증명, GIN sum injectivity 반례, over-smoothing 수렴 속도 측정까지 단계적으로 심화됩니다.
 >
 > 🧭 **푸터 네비게이션**: 각 문서 하단에 `◀ 이전 / 📚 README / 다음 ▶` 링크가 항상 제공됩니다. 챕터 경계에서도 다음 챕터 첫 문서로 자동 연결됩니다.
 >
@@ -555,23 +581,35 @@ Day 7  Ch6-01  Node Classification
 - **Neural Message Passing for Quantum Chemistry** (Gilmer, Schoenholz, Riley, Vinyals, Dahl, 2017) — **MPNN 통일**
 - **Inductive Representation Learning on Large Graphs** (Hamilton, Ying, Leskovec, 2017) — **GraphSAGE**
 - **Graph Attention Networks** (Velickovic, Cucurull, Casanova, Romero, Lio, Bengio, 2018) — **GAT**
+- **How Attentive are Graph Attention Networks?** (Brody, Alon, Yahav, 2022) — **GATv2** (static-attention 한계 해결)
 - **How Powerful are Graph Neural Networks?** (Xu, Hu, Leskovec, Jegelka, 2019) — **GIN + WL equivalence**
+- **Principal Neighbourhood Aggregation for Graph Nets** (Corso et al., 2020) — **PNA** (multi-aggregator)
+- **Residual Gated Graph ConvNets** (Bresson & Laurent, 2017) — **GatedGCN**
 - **Modeling Relational Data with Graph Convolutional Networks** (Schlichtkrull et al., 2018) — **R-GCN**
+- **Composition-based Multi-Relational Graph Convolutional Networks** (Vashishth et al., 2020) — **CompGCN**
 - **Heterogeneous Graph Attention Network** (Wang et al., 2019) — **HAN**
+- **Heterogeneous Graph Transformer** (Hu et al., 2020) — **HGT**
 
 ### 🔬 Expressive Power · WL · Positional Encoding
 - **Weisfeiler-Leman Go Neural** (Morris et al., 2019) — k-WL 연구
-- **Provably Powerful Graph Networks** (Maron et al., 2019) — **k-FGNN**
+- **Provably Powerful Graph Networks** (Maron et al., 2019) — **k-FGNN, PPGN**
+- **Relational Pooling for Graph Representations** (Murphy et al., 2019) — **Random ID injection**
 - **Position-aware Graph Neural Networks** (You, Ying, Leskovec, 2019) — **P-GNN**
 - **Benchmarking Graph Neural Networks** (Dwivedi et al., 2020) — **LapPE**
-- **Graph Neural Networks with Learnable Structural and Positional Representations** (Dwivedi et al., 2022)
+- **Graph Neural Networks with Learnable Structural and Positional Representations** (Dwivedi et al., 2022) — **RWPE**
+- **Sign and Basis Invariant Networks for Spectral Graph Representation Learning** (Lim et al., 2022) — **SignNet / BasisNet**
 
 ### 🌫️ Over-smoothing · 깊은 GNN
 - **Deeper Insights into Graph Convolutional Networks for Semi-Supervised Learning** (Li, Han, Wu, 2018) — **Over-smoothing 원전**
+- **Graph Neural Networks Exponentially Lose Expressive Power for Node Classification** (Oono & Suzuki, 2020) — Over-smoothing 의 spectral 분석
 - **DropEdge: Towards Deep Graph Convolutional Networks on Node Classification** (Rong et al., 2020) — **DropEdge**
 - **PairNorm: Tackling Oversmoothing in GNNs** (Zhao & Akoglu, 2020) — **PairNorm**
 - **Predict then Propagate: Graph Neural Networks meet Personalized PageRank** (Klicpera, Bojchevski, Günnemann, 2019) — **APPNP**
 - **Representation Learning on Graphs with Jumping Knowledge Networks** (Xu et al., 2018) — **JK-Net**
+- **Simple and Deep Graph Convolutional Networks** (Chen et al., 2020) — **GCNII** (initial residual + identity mapping, 64-layer)
+- **Adaptive Universal Generalized PageRank Graph Neural Network** (Chien et al., 2021) — **GPR-GNN** (heterophilic)
+- **Beyond Low-frequency Information in Graph Convolutional Networks** (Bo et al., 2021) — **FAGCN** (signed attention)
+- **Beyond Homophily in Graph Neural Networks** (Zhu et al., 2020) — **H2GCN**
 
 ### 🎯 Applications · Large-scale
 - **Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks** (Chiang et al., 2019)
@@ -584,10 +622,27 @@ Day 7  Ch6-01  Node Classification
 ### 🔮 Graph Transformer · Equivariant
 - **Do Transformers Really Perform Badly for Graph Representation?** (Ying et al., 2021) — **Graphormer**
 - **A Generalization of Transformer Networks to Graphs** (Dwivedi & Bresson, 2021) — Graph Transformer
-- **Rethinking Graph Transformers with Spectral Attention** (Kreuzer et al., 2021) — SAN
+- **Rethinking Graph Transformers with Spectral Attention** (Kreuzer et al., 2021) — **SAN**
+- **Recipe for a General, Powerful, Scalable Graph Transformer** (Rampášek et al., 2022) — **GraphGPS** (MPNN + Transformer hybrid)
+- **Specformer: Spectral Graph Neural Networks Meet Transformers** (Bo et al., 2023) — **Specformer**
+- **JacobiConv: A Graph Spectral Filter via Jacobi Polynomials** (Wang et al., 2022)
 - **E(n) Equivariant Graph Neural Networks** (Satorras, Hoogeboom, Welling, 2021) — **EGNN**
 - **SE(3)-Transformers: 3D Roto-Translation Equivariant Attention Networks** (Fuchs et al., 2020)
 - **Tensor Field Networks** (Thomas et al., 2018) — steerable filters
+- **NequIP: E(3)-equivariant graph neural networks** (Batzner et al., 2022)
+- **MACE: Higher Order Equivariant Message Passing** (Batatia et al., 2022)
+
+### 🌐 Scaling · Foundation Model · LLM+GNN
+- **Cluster-GCN: An Efficient Algorithm for Training Deep and Large Graph Convolutional Networks** (Chiang et al., 2019)
+- **GraphSAINT: Graph Sampling Based Inductive Learning Method** (Zeng et al., 2020)
+- **GNNAutoScale: Scalable and Expressive Graph Neural Networks via Historical Embeddings** (Fey et al., 2021)
+- **Self-Supervised Graph Transformer on Large-Scale Molecular Data** (Rong et al., 2020) — **GROVER**
+- **One For All: Towards Training One Graph Model for All Classification Tasks** (Liu et al., 2024) — **OFA**
+- **Long Range Graph Benchmark** (Dwivedi et al., 2022) — **LRGB**
+
+### ⚗️ Diffusion on Graphs · Generation
+- **DiGress: Discrete Denoising Diffusion for Graph Generation** (Vignac et al., 2022)
+- **Score-based Generative Modeling of Graphs via the System of Stochastic Differential Equations** (Jo et al., 2022) — **GDSS**
 
 ---
 
