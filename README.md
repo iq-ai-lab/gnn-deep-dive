@@ -6,11 +6,15 @@
 
 <br/>
 
-> *"Message Passing을 **이름으로 아는 것**과 — `Xu et al. 2019`의 GIN 정리에서 Message Passing GNN의 표현력이 **1-Weisfeiler-Lehman graph isomorphism test**에 의해 상한이 매겨지고, **sum + MLP aggregator가 multiset에 injective**이기 때문에 GIN이 이 상한을 달성한다는 것을 증명할 수 있는 것은 다르다.
-> Over-smoothing을 **현상으로 아는 것**과 — `Li et al. 2018`의 정리에서 $L$층 GCN propagation 후 node feature가 $\ker(L_{\text{sym}})$ (= connected component 수만큼의 공간) 으로 지수 수렴하고, connected graph에서는 상수 vector로 collapse한다는 것을 Laplacian 고유분해로 증명할 수 있는 것은 다르다."*
+> *Message Passing을 **이름으로 아는 것**과 — Xu et al. 2019의 GIN 정리에서 Message Passing GNN의 표현력이 1-Weisfeiler-Lehman test에 의해 상한이 매겨지고, sum + MLP aggregator가 multiset에 injective이기 때문에 GIN이 이 상한을 달성한다는 것을 증명할 수 있는 것은 다르다.*
+
+> *Over-smoothing을 **현상으로 아는 것**과 — Li et al. 2018의 정리에서 $L$층 GCN propagation 후 node feature가 정규화된 Laplacian의 null space (= connected component 수만큼의 공간) 으로 지수 수렴하고, connected graph에서는 상수 vector로 collapse한다는 것을 Laplacian 고유분해로 증명할 수 있는 것은 다르다.*
+
+<br/>
 
 Bruna 2014 Spectral Networks · Defferrard 2016 ChebNet · Kipf & Welling 2017 GCN · Hamilton 2017 GraphSAGE · Velickovic 2018 GAT · Gilmer 2017 MPNN · Xu 2019 GIN+WL · Li 2018 Over-smoothing · Rong 2020 DropEdge · Klicpera 2019 APPNP · Ying 2021 Graphormer · Satorras 2021 EGNN까지
-**"그래프 위의 딥러닝이 왜 Spectral·Spatial·Message Passing의 세 관점에서 동치이고, WL 상한과 Over-smoothing이라는 **두 가지 구조적 한계**가 왜 불가피한가"** 를 Laplacian 고유분해·GCN 유도·WL 등가성 증명·ERF 측정으로 끝까지 파헤칩니다
+
+**"그래프 위의 딥러닝이 왜 Spectral·Spatial·Message Passing의 세 관점에서 동치이고, WL 상한과 Over-smoothing이라는 두 가지 구조적 한계가 왜 불가피한가"** 를 Laplacian 고유분해·GCN 유도·WL 등가성 증명·$P^L$ 수렴 분석으로 끝까지 파헤칩니다
 
 <br/>
 
