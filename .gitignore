@@ -1,0 +1,231 @@
+# =============================================================================
+# Graph Neural Network Deep Dive — .gitignore
+# =============================================================================
+
+# ── Python ──────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyd
+
+# Distribution / Packaging
+.Python
+build/
+dist/
+eggs/
+.eggs/
+*.egg-info/
+*.egg
+MANIFEST
+sdist/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ── Jupyter Notebook ─────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# ── NumPy / PyTorch / PyG cache ──────────────────────────────────────────────
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.joblib
+*.pt
+*.pth
+*.safetensors
+*.onnx
+
+# Framework caches (PyTorch, PyG, DGL)
+.torch_cache/
+.pyg_cache/
+.dgl_cache/
+
+# HuggingFace / datasets cache
+.cache/huggingface/
+datasets_cache/
+
+# ── Graph / dataset caches ───────────────────────────────────────────────────
+# PyG 표준 데이터셋 디렉토리 (Planetoid, TUDataset, OGB 등)
+# 각 챕터의 실험에서 다운로드되는 raw / processed
+# Ch1-04 Karate club·spectral clustering,
+# Ch2-03 Cora·Citeseer GCN 재현,
+# Ch3-02 Reddit·PPI large-scale GraphSAGE,
+# Ch3-04 MUTAG·PROTEINS TUDataset,
+# Ch4-04 CSL·Paley strongly regular graphs,
+# Ch5-01 Cora·Citeseer over-smoothing 측정,
+# Ch6 OGB node/link/graph benchmarks,
+# Ch7-01 OGB-LSC PCQM4M, Ch7-03 QM9·MD17
+data/
+datasets/
+Planetoid/
+TUDataset/
+ogb_data/
+ogbn_*/
+ogbg_*/
+ogbl_*/
+qm9/
+MD17/
+ZINC/
+MUTAG/
+PROTEINS/
+ENZYMES/
+PPI/
+Reddit/
+raw/
+processed/
+!data/.gitkeep
+
+# Downloaded raw graph files
+*.edgelist
+*.adjlist
+*.gml
+*.graphml
+*.mat
+
+# ── Experiment outputs ───────────────────────────────────────────────────────
+# 생성된 이미지·시각화 결과물 (각 챕터)
+# Ch1: Fiedler vector 클러스터링·graph Fourier 기저·PageRank heatmap,
+# Ch2: ChebNet K-hop 시각화·GCN propagation matrix,
+# Ch3: GAT attention weight·GIN vs Mean WL-fail·GraphSAGE sampling,
+# Ch4: 1-WL refinement step·CSL non-isomorphic 쌍·LapPE 시각화,
+# Ch5: over-smoothing cosine similarity plot·$P^L$ 고유값 감쇠,
+# Ch6: node embedding t-SNE·link prediction ROC·graph generation sample,
+# Ch7: Graphormer attention map·EGNN 분자 궤적·scaling 곡선
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+*.gif
+*.mp4
+*.webp
+
+# 훈련 결과 / 체크포인트
+results/
+outputs/
+logs/
+checkpoints/
+runs/
+wandb/
+mlruns/
+tensorboard/
+lightning_logs/
+*.log
+*.csv
+*.h5
+*.hdf5
+*.tfevents.*
+
+# 재현 실험 산출물 (논문별)
+reproductions/bruna2014/*.npz
+reproductions/defferrard2016/*.pt
+reproductions/kipf2017/*.pt
+reproductions/hamilton2017/*.pt
+reproductions/velickovic2018/*.pt
+reproductions/xu2019/*.pt
+reproductions/gilmer2017/*.pt
+reproductions/li2018/*.npz
+reproductions/rong2020/*.pt
+reproductions/klicpera2019/*.pt
+reproductions/xu2018_jkn/*.pt
+reproductions/ying2021_graphormer/*.pt
+reproductions/satorras2021_egnn/*.pt
+reproductions/maron2019_kfgnn/*.pt
+
+# Pretrained weight cache (PyG / DGL)
+pretrained/
+weights/
+hub/
+
+# ── IDE / Editor ─────────────────────────────────────────────────────────────
+# JetBrains (PyCharm, IntelliJ)
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Vim / Emacs
+*.swp
+*.swo
+*~
+\#*\#
+.\#*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Linux
+.directory
+
+# ── Documentation build ──────────────────────────────────────────────────────
+docs/_build/
+docs/generated/
+site/
+.mkdocs_cache/
+
+# ── Secrets / Credentials ────────────────────────────────────────────────────
+.env.local
+.env.*.local
+secrets.py
+credentials.json
+*.pem
+*.key
+
+# ── GPU / CUDA cache ─────────────────────────────────────────────────────────
+.nv_cache/
+.nvidia/
+*.cu.o
+
+# ── torch-scatter / torch-sparse build artifacts ─────────────────────────────
+# PyG 의존성 빌드 시 생성되는 임시 파일
+.torch_extensions/
+*.ninja
+*.ninja_log
+*.ninja_deps
+
+# ── Miscellaneous ────────────────────────────────────────────────────────────
+.hypothesis/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+*.mo
+*.pot
